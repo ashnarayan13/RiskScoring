@@ -7,6 +7,8 @@ Stage 2 - Value At Risk
 We use the following links :- http://www.investopedia.com/articles/04/092904.asp
 Two types - Historical and Variance Covariance
 Deadline - New Years! 
+For VAR, https://www.glynholton.com/notes/var_measure/ explains the entire process part by part. We can implement this, but it will take time. 
+
 
 
 Resources :
