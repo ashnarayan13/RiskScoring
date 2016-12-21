@@ -19,3 +19,4 @@ http://www.macroption.com/historical-volatility-calculation/
 2. Calculation of relative volatility after calculating historical 
 
 http://www.macroption.com/historical-volatility-calculation/
+http://www.fool.com/knowledge-center/how-to-calculate-the-beta-coefficient-for-a-single.aspx
