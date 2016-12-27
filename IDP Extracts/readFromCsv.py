@@ -25,6 +25,6 @@ def calcVar(filename):
     print np.percentile(current, q=5)
     pl.show()
 
+fileName=raw_input("Enter file name :")
+calcVar(fileName)
 
-calcVar('wrk1.csv')
-print "hello"
