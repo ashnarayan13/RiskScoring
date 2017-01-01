@@ -4,10 +4,10 @@ import Beta
 from datetime import  datetime
 
 #reading from table
-starttime =datetime.strptime('12 Dec 2016', '%d %b %Y')
-endtime = datetime.strptime('12 Dec 2015', '%d %b %Y')
+starttime =datetime.strptime('11 Dec 2016', '%d %b %Y').date()
+endtime = datetime.strptime('1 Dec 2016', '%d %b %Y').date()
 
-EqWorkbook = xlrd.open_workbook("worksheet1.xlsx")
+EqWorkbook = xlrd.open_workbook("worksheet12.xlsx")
 Eqsheet = EqWorkbook.sheet_by_name("Tabelle1")
 indexClosingPrice = []
 equityClosingPrice = []
@@ -74,4 +74,3 @@ for i in range(1,33):
 #print(tot)
 #print(allinfo)
 #print(return_month)
-
