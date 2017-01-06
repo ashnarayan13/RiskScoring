@@ -33,7 +33,7 @@ def volatility(inp, loc):
         if(ctr!=21):
             temp = temp + retm[i]
             ctr = ctr + 1
-        if(ctr >= 21):
+        if(ctr>=21):
            ravg.append(float(temp/21))
            ctr = 0
 #print(len(ravg))
@@ -41,14 +41,15 @@ def volatility(inp, loc):
 #squared dev 
     ravg_t = 0
     chk = 0
-    partial = 0
+    partial = 0.0
     temp_std = []
     for i in range(len(retm)):
         if((i+1)%22 == 0):
             temp_std.append(partial)
             ravg_t = ravg_t + 1
             partial = 0
-        partial = partial + (retm[i]-ravg[ravg_t])**2
+        else:
+            partial = partial + (retm[i]-ravg[ravg_t])**2
     std_val = sum(temp_std)/20
     print(worksheet)
     print("Daily volatility : {}".format(std_val))
