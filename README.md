@@ -20,3 +20,14 @@ http://www.macroption.com/historical-volatility-calculation/
 
 http://www.macroption.com/historical-volatility-calculation/
 http://www.fool.com/knowledge-center/how-to-calculate-the-beta-coefficient-for-a-single.aspx
+
+Added FILES named EBITDA, DEBT_EQUITY, RETURN_EQUITY and ROCE
+The following need to be calculated for these files
+
+EBITDA.xlsx : Plot EBITDA in a histogram, Plot EBITDA/SALES 
+
+RETURN_EQUITY.xlsx : Plot REV_AFTER_TAX/SHARE_OUT
+
+DEBT_EQUITY.xlsx : Plot (DEBT-EQUITY)/CASHEQUITY
+
+ROCE.xlsx : Plot EBIT/(DEBT+EQUITY)
