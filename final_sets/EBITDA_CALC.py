@@ -1,5 +1,6 @@
 import xlwt
 import xlrd
+import matplotlib.pyplot as plt
 
 #EBIT Calculation is correct! Compares the EBITDA values of the years
 def EBIT(choice, sheet):
@@ -14,6 +15,9 @@ def EBIT(choice, sheet):
             #print(info[i], " lesser ", info[i+1])
             up = up + 1
     print("EBITDA ",up)
+    plt.subplot(321)
+    plt.title("EBITDA")
+    plt.plot(info)
 #ROE works! Follows the equation taken from the lecture (Total_Revenue - Cost_Of_Goods_Sold)/EQUITY
 def ROE(choice, sheet21, sheet22, sheet23):
     roe = []
@@ -27,6 +31,9 @@ def ROE(choice, sheet21, sheet22, sheet23):
             #print(roe[i], " lesser ", roe[i+1])
             up = up + 1
     print("ROE ",up)
+    plt.subplot(322)
+    plt.title("ROE")
+    plt.plot(roe)
 #GEAR works! will output 0 if the debt is 0 as it can't be used otherwise using the equation debt/equity
 def GEAR(choice, sheet31, sheet32):
     gear= []
@@ -41,6 +48,9 @@ def GEAR(choice, sheet31, sheet32):
             #print(info[i], " lesser ", info[i+1])
             up = up + 1
     print("GEARING ",up)
+    plt.subplot(323)
+    plt.title("GEAR")
+    plt.plot(gear)
 #Profitability works! Using the equation EBITDA/Net_sale 
 def PROFITABILITY(choice, sheet11, sheet12):
     prof= []
@@ -54,6 +64,9 @@ def PROFITABILITY(choice, sheet11, sheet12):
             #print(info[i], " lesser ", info[i+1])
             up = up + 1
     print("PROFITABILITY ",up)
+    plt.subplot(324)
+    plt.title("PROFITABILITY")
+    plt.plot(prof)
 #ROCE works! Using the equation EBIT/(ASSETS-LIABILITY)
 def ROCE(choice, sheet41, sheet42, sheet43):
     roce = []
@@ -65,6 +78,12 @@ def ROCE(choice, sheet41, sheet42, sheet43):
         if(roce[i] <= roce[i+1]):
             up = up+1
     print("ROCE ",up)
+    plt.subplot(325)
+    plt.plot(roce)
+    plt.title("ROCE")
+    plt.subplots_adjust(top=0.92, bottom=0.08, left=0.10, right=0.95, hspace=0.25,
+                    wspace=0.35)
+    plt.show()
 
 #############################################
 workbook1 = xlrd.open_workbook("EBITDA.xlsx")
