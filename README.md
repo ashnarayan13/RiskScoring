@@ -40,4 +40,9 @@ Following links explain briefly a python implementation of the algo
 1) https://pythonprogramming.net/monte-carlo-simulator-python/
 2) https://people.duke.edu/~ccc14/sta-663/MonteCarlo.html
 
+Samples
+1) https://github.com/rakhimov/scram
+2) https://github.com/yhilpisch/dx
+3) https://github.com/tisimst/vatic
+4) https://github.com/monetate/monte-carlo-simulator
 Data cleaning pending. 
