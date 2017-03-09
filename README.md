@@ -31,3 +31,13 @@ RETURN_EQUITY.xlsx : Plot REV_AFTER_TAX/SHARE_OUT
 DEBT_EQUITY.xlsx : Plot (DEBT-EQUITY)/CASHEQUITY
 
 ROCE.xlsx : Plot EBIT/(DEBT+EQUITY)
+
+
+STAGE 2: 
+Implementation of MonteCarlo algorithms
+Following links explain briefly a python implementation of the algo
+
+1) https://pythonprogramming.net/monte-carlo-simulator-python/
+2) https://people.duke.edu/~ccc14/sta-663/MonteCarlo.html
+
+Data cleaning pending. 
