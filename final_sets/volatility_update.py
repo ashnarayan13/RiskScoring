@@ -2,7 +2,7 @@ import xlrd
 import numpy
 def volatility(inp):
     print(inp)
-    workbook = xlrd.open_workbook("ins_modified.xlsm")
+    workbook = xlrd.open_workbook("/home/ashwath/Downloads/ins_modified.xlsx")
     sheet = workbook.sheet_by_name("TS")
     allinfo = []
     const = inp*2

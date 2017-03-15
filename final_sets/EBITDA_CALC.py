@@ -1,4 +1,3 @@
-import xlwt
 import xlrd
 import matplotlib.pyplot as plt
 
@@ -10,8 +9,8 @@ def EBIT(choice, sheet):
             info.append(int(sheet.cell_value(choice,cols)))
     #print info
     up = 0
-    for i in range(0, len(info)-1):
-        if(info[i]<=info[i+1]):
+    for i in range(1, len(info)):
+        if(info[i]>=info[i-1]):
             #print(info[i], " lesser ", info[i+1])
             up = up + 1
     print("EBITDA ",up)
@@ -26,8 +25,8 @@ def ROE(choice, sheet21, sheet22, sheet23):
             roe.append(float((float(sheet21.cell_value(choice, i)-sheet23.cell_value(choice, i))/float(sheet22.cell_value(choice, i)))*100))
     #print(roe)
     up = 0
-    for i in range(0, len(roe)-1):
-        if(roe[i]<=roe[i+1]):
+    for i in range(1, len(roe)):
+        if(roe[i]>=roe[i-1]):
             #print(roe[i], " lesser ", roe[i+1])
             up = up + 1
     print("ROE ",up)
@@ -43,8 +42,8 @@ def GEAR(choice, sheet31, sheet32):
                 gear.append(float((float(sheet31.cell_value(choice, i))/float(sheet32.cell_value(choice, i)))*100))
     #print(gear)
     up = 0
-    for i in range(0, len(gear)-1):
-        if(gear[i]<=gear[i+1]):
+    for i in range(1, len(gear)):
+        if(gear[i]<=gear[i-1]):
             #print(info[i], " lesser ", info[i+1])
             up = up + 1
     print("GEARING ",up)
@@ -59,8 +58,8 @@ def PROFITABILITY(choice, sheet11, sheet12):
             prof.append(float((float(sheet11.cell_value(choice, i))/float(sheet12.cell_value(choice, i)))*100))
     #print(prof)
     up = 0
-    for i in range(0, len(prof)-1):
-        if(prof[i]<=prof[i+1]):
+    for i in range(1, len(prof)):
+        if(prof[i]>=prof[i-1]):
             #print(info[i], " lesser ", info[i+1])
             up = up + 1
     print("PROFITABILITY ",up)
@@ -74,8 +73,8 @@ def ROCE(choice, sheet41, sheet42, sheet43):
         if(sheet41.cell_value(choice, i) != "NULL" and sheet42.cell_value(choice, i) != "NULL" and sheet43.cell_value(choice, i) != "NULL"):
             roce.append(float(sheet41.cell_value(choice, i))/(float(sheet42.cell_value(choice, i))-float(sheet43.cell_value(choice, i))))
     up = 0
-    for i in range(0, len(roce)-1):
-        if(roce[i] <= roce[i+1]):
+    for i in range(1, len(roce)):
+        if(roce[i] >= roce[i-1]):
             up = up+1
     print("ROCE ",up)
     plt.subplot(325)
