@@ -2,7 +2,7 @@ import xlrd
 import numpy
 def volatility(inp):
     print(inp)
-    workbook = xlrd.open_workbook("/home/ashwath/Downloads/ins_modified.xlsx")
+    workbook = xlrd.open_workbook("ins_modified.xlsx")
     sheet = workbook.sheet_by_name("TS")
     allinfo = []
     const = inp*2
@@ -17,9 +17,9 @@ def volatility(inp):
     retm = []
     for rows in range(3, sheet.nrows-1):
         if(sheet.cell_value(rows,const)==' '):
-            print("wut")
+            print("Missing value")
         else:
-            print(str(sheet.cell_value(rows,const)))
+            #print(str(sheet.cell_value(rows,const))) debugging
             current = []
             current.append(float(sheet.cell_value(rows,const)))
             allinfo.append(current)
@@ -56,7 +56,7 @@ def volatility(inp):
         else:
             partial = partial + (retm[i]-ravg[ravg_t])**2
     std_val = sum(temp_std)/20
-    print(worksheet)
+    #print(worksheet) debugging
     print("Daily volatility : {}".format(std_val))
     std_val_annual = std_val*(252**0.5)
     print("Annualized Volatility : {}".format(std_val_annual))
