@@ -1,6 +1,6 @@
 import xlrd
 import matplotlib.pyplot as plt
-
+import xlwt
 #EBIT Calculation is correct! Compares the EBITDA values of the years
 def EBIT(choice, sheet):
     info = []
