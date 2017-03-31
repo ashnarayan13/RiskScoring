@@ -5,6 +5,7 @@ import xlrd
 import csv
 import math
 import xlsxwriter
+import random
 from sklearn.cluster import KMeans
 """
  y=y.reshape(1,-1)
@@ -28,15 +29,21 @@ for i in range(1,7):
 
     print "Appended for Year ",i
 
+
+#for x in range(100000):
+ #   ebitda = np.append(ebitda,random.randint(min(ebitda),max(ebitda)))
+  #  print(x)
+  
 length=ebitda.size
-print ebitda
+print ("length of", length)
+
 ebitda=ebitda.reshape(length,-1)
 
 kmeans=KMeans(n_clusters=3, random_state=0).fit(ebitda)
 labels=kmeans.labels_
 print labels
 centers = kmeans.cluster_centers_
-print centers
+print ("This is the k mean centers",centers)
 ds = ebitda[np.where(labels==0)]
 dy = ebitda[np.where(labels==1)]
 dz = ebitda[np.where(labels==2)]
@@ -58,5 +65,7 @@ for i in range(0,lz):
     yy=np.append(yy,3)
 pl.scatter(dz,yy, c=None, s=500)
 pl.show()
-print ds
+print ("this is", ds)
+print(int(max(ebitda)))
+print(int(min(ebitda)))
 

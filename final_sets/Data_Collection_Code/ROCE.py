@@ -3,7 +3,7 @@ import numpy
 #15 16 (ebit/assets-liabilities)
 #or 8 19 (ebit/equity+debt)
 from xlwt import Workbook
-wb1 = xlrd.open_workbook("instruments.xlsm");
+wb1 = xlrd.open_workbook("instruments_fix.xlsx");
 comp = wb1.sheet_by_name("CDAX")
 s1 = wb1.sheet_by_name("FY-1")
 s2 = wb1.sheet_by_name("FY-2")

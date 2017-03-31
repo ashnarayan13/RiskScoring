@@ -5,7 +5,7 @@ from scipy.cluster.vq import kmeans,vq
 
 # data generation
 data = vstack((rand(400,2) + array([.5,.5]),rand(400,2)))
-
+print(data)
 # computing K-Means with K = 2 (2 clusters)
 centroids,_ = kmeans(data,3)
 # assign each sample to a cluster
