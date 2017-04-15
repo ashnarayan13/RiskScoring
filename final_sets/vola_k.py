@@ -33,7 +33,7 @@ maxs=max(volatility)
 adds = int(((mins-maxs)/2)*0.5)
 mins = mins - adds
 maxs = maxs - adds
-for x in range(100000):
+for x in range(10000):
     volatility = np.append(volatility,random.randint(min(volatility),max(volatility)))
     print(x)
 length=volatility.size
