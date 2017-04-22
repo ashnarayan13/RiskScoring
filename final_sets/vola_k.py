@@ -19,16 +19,13 @@ Traceback (most recent call last):
 
 workbook = xlrd.open_workbook("/home/ashwath/FinancialModel/final_sets/Yearly_Volatility.xlsx")
 volatility = np.array([])
-volatility1 = np.array([])
 unfiltered = np.array([])
 #def appendForYearI(sheetIndex,ebitda):
 #for i in range(1,7):
 sheet = workbook.sheet_by_name("VOLATILITY1")
-for r in range(3,sheet.nrows):
+for r in range(2,sheet.nrows):
     val=sheet.cell_value(r,1)
-    if(val == 'NULL'):
-        continue
-    print val
+    #print val
     volatility=np.append(volatility,float(val))
     unfiltered=np.append(unfiltered,float(val))
 
@@ -42,13 +39,12 @@ maxs = maxs - adds
  #   volatility = np.append(volatility,random.uniform(min(volatility),max(volatility)))
   #  print(x)
 length=volatility.size
-print ("length of", length)
-volatility1 = volatility
+print (len(volatility))
 volatility=volatility.reshape(length,-1)
 
 kmeans=KMeans(n_clusters=3, random_state=0).fit(volatility)
 labels=kmeans.labels_
-print labels
+#print labels
 centers = kmeans.cluster_centers_
 print ("This is the k mean centers",centers)
 ds = volatility[np.where(labels==0)]
@@ -59,7 +55,7 @@ yy = np.array([])
 for i in range(0,l):
     yy=np.append(yy,1)
 pl.scatter(ds,yy,c=None,s=500)
-print l
+#print l
 ly=len(dy)
 yy = np.array([])
 for i in range(0,ly):
@@ -80,22 +76,27 @@ m = MyStruct(centers[0], centers[1], centers[2])
 #print(kmeans.cluster_centers_)
 inc = 1;
 sol = kmeans.predict(volatility)
-print(sol)
+#print(sol)
 lim = 0
 results = np.array([])
-print(len(unfiltered))
+#print(len(unfiltered))
 #for i in range(0,len(volatility)):
  #   print(volatility[i])
+count = 0
 for j in range(0, len(unfiltered)):
+    count = 0
     for i in range(0,len(volatility)):
-        if ((unfiltered[j])==(volatility[i])):
+        if ((unfiltered[j])==(volatility[i]) and count==0):
             temp = sol[i]
             #print(sol[i])
             point = centers[temp]
             #print(point)
             dist = unfiltered[j] - point
-            print(volatility[i])
+            #print(volatility[i])
             results = np.append(results, float(dist))
+            count = 1
             continue
+print(len(volatility))
+print(len(unfiltered))
 print(len(results))
 
