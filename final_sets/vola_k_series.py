@@ -39,7 +39,7 @@ for vols in range(0,len(sheets)):
     maxs=int(max(volatility))
     adds = int(((mins-maxs)/2)*0.5)
     mins = mins - adds
-    maxs = maxs - adds
+    maxs = maxs + adds
     #GENERATE RANDOM NUMBERS
     for x in range(10000):
         volatility = np.append(volatility,random.uniform(min(volatility),max(volatility)))
@@ -74,7 +74,10 @@ for vols in range(0,len(sheets)):
     #PLOT POINTS IF NEEDED
     #pl.scatter(dz,yy, c=None, s=500)
     #pl.show()
+
+        
     #COMPARE THE COMPANY RESULTS WITH CLUSTER CENTERS AND STORE THE DISTANCE
+    #RISK SCORING PART OF THE CODE
     mapping = kmeans.predict(volatility)
     results = np.array([])
     lim = 3
@@ -134,6 +137,7 @@ for vols in range(0,len(sheets)):
     base3 = abs(maxval2 - minval2)/float(5)
     print(minval0)
     print(maxval0)
+    
     #SPLIT THE RANGE FOR EACH CENTROID INTO 5 PARTS FOR RISK RATING
     for i in range(0,5):
         split1 = np.append(split1,(minval0 + ((i+1)*base1)))
@@ -142,6 +146,8 @@ for vols in range(0,len(sheets)):
     lim = 3
     print(split1)
     print(split2)
+
+    
     #CHECK IF THE COMPANY FALLS IN A PARTICULAR RANGE AND PROVIDE RISK RATING
     for i in range(0,len(unfiltered)):
         if(store[i] == 0):
@@ -179,4 +185,5 @@ for vols in range(0,len(sheets)):
                 risk = 1
         sheetwrite.write(lim,4,risk)
         lim = lim+1
+#SAVE THE FILE
 book.save("kmeansResults.xlsx")
