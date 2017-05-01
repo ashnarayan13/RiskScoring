@@ -71,8 +71,8 @@ for vols in range(0,len(sheets)):
     for i in range(0, lz):
         yy = np.append(yy, 3)
         # PLOT POINTS IF NEEDED
-        # pl.scatter(dz,yy, c=None, s=500)
-        # pl.show()
+    pl.scatter(dz,yy, c=None, s=500)
+    # pl.show()
 
     mapping = kmeans.predict(var)
     results = np.array([])
@@ -144,6 +144,7 @@ for vols in range(0,len(sheets)):
     print(split2)
 
     # CHECK IF THE COMPANY FALLS IN A PARTICULAR RANGE AND PROVIDE RISK RATING
+    risks=np.array([])
     for i in range(0, len(unfiltered)):
         if (store[i] == 0):
             if (minval0 <= unfiltered[i] <= split1[0]):
@@ -179,7 +180,10 @@ for vols in range(0,len(sheets)):
             if (split3[3] <= unfiltered[i] <= split3[4]):
                 risk = 1
         sheetwrite.write(lim, 4, risk)
+        risks=np.append(risks,risk)
         lim = lim + 1
+    pl.plot(risks)
+    pl.show()
 # SAVE THE FILE
 book.save("kmeansVarResults.xlsx")
 
