@@ -5,7 +5,7 @@ import xlrd
 import csv
 import math
 import xlsxwriter
-book=xlsxwriter.Workbook("VARyrwise.xlsx")
+book=xlsxwriter.Workbook("VARyrssswise.xlsx")
 wsheet=book.add_worksheet("sheet1")
 yr=2006
 for i in range(0,11):
@@ -33,7 +33,7 @@ def calcVar(ColIndex):
     for i in range(0,11):
         current = []
         for rnum in range(yearList[i],yearList[i+1]-1):
-            x=math.log(sheet.cell(rnum+1,index).value/sheet.cell(rnum,index).value)
+            x=math.log(sheet.cell(rnum,index).value/sheet.cell(rnum+1,index).value)
             current.append(x)
 
         print len(current)
@@ -47,7 +47,7 @@ def calcVar(ColIndex):
         print var
         wsheet.write(i,col,var)
         #pl.show()
-workbook = xlrd.open_workbook("ins_modified.xlsx")
+workbook = xlrd.open_workbook("DataSet_Final.xlsx")
 sheet = workbook.sheet_by_name("TS")
 for i in range(3,sheet.ncols,2):
     #ColIndex=raw_input("Enter Column No :")
