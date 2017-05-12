@@ -4,6 +4,7 @@ import xlrd
 import xlwt
 import random
 from sklearn.cluster import KMeans
+import scipy
 
 
 def create_data(sheet, col):
@@ -17,13 +18,17 @@ def create_data(sheet, col):
 
 
 def kmeans_setup(data):
-    # avg = (max(data) - min(data)) / 16
+    avg = (max(data) - min(data)) / 16
     print(min(data), max(data))
+    mins = min(data) - avg
+    maxs = max(data) + avg
     for vals in range(10000):
-        temp = random.uniform(min(data), max(data))
+        temp = random.uniform(mins, maxs)
         data = np.append(data, temp)
     data = data.reshape(data.size, -1)
-    kmeans = KMeans(n_clusters=3, random_state=0).fit(data)
+    kmeans = KMeans(n_clusters=3, random_state=0, max_iter=300, n_init=100, algorithm='auto').fit(data)
+    # temp = kmeans.predict(data)
+    # scipy.stats.mstats.normaltest(temp, axis=0)
     return kmeans, data
 
 
@@ -45,11 +50,20 @@ def map_distance(kmeans, data, vals):
     minval1 = float(actual[1])
     maxval2 = float(actual[2])
     minval2 = float(actual[2])
+    nulls = 0
+    ones = 0
+    twos = 0
     for i in range(0, len(vals)):
         count = 0
         for j in range(0, len(data)):
             if vals[i] == data[j] and count == 0:
                 count = 1
+                if bins[i] == 0:
+                    nulls += 1
+                elif bins[i] == 1:
+                    ones += 1
+                elif bins[i] == 2:
+                    twos += 1
                 mappings = np.append(mappings, kmeans.cluster_centers_[bins[i]])
                 temp_dist = vals[i] - kmeans.cluster_centers_[bins[i]]
                 distances = np.append(distances, temp_dist)
@@ -69,6 +83,9 @@ def map_distance(kmeans, data, vals):
                         maxval2 = vals[i]
                     if vals[i] <= minval2:
                         minval2 = vals[i]
+    print(nulls)
+    print(ones)
+    print(twos)
     min_max = np.append(min_max, minval0)
     min_max = np.append(min_max, maxval0)
     min_max = np.append(min_max, minval1)
@@ -78,7 +95,7 @@ def map_distance(kmeans, data, vals):
     return mappings, distances, min_max, actual
 
 
-def risk_vals(ranges_final, vals):
+def risk_vals(ranges_final, vals, sorted_pts, mapping):
     split1 = np.array([])
     split2 = np.array([])
     split3 = np.array([])
@@ -106,32 +123,79 @@ def risk_vals(ranges_final, vals):
         print(int(j))
     # Change the risk numbers based on the parameter
     risk = np.array([])
-    for i in vals:
+    for i in range(0, len(vals)):
+        if mapping[i] == sorted_pts[0]:
+            if split1[0] <= vals[i] <= split1[1]:
+                risk = np.append(risk, 1)
+            elif split1[1] <= vals[i] <= split1[2]:
+                risk = np.append(risk, 2)
+            elif split1[2] <= vals[i] <= split1[3]:
+                risk = np.append(risk, 3)
+            elif split1[3] <= vals[i] <= split1[4]:
+                risk = np.append(risk, 4)
+            elif split1[4] <= vals[i] <= split1[5]:
+                risk = np.append(risk, 5)
+        elif mapping[i] == sorted_pts[1]:
+            if split2[0] <= vals[i] <= split2[1]:
+                risk = np.append(risk, 1)
+            elif split2[1] <= vals[i] <= split2[2]:
+                risk = np.append(risk, 2)
+            elif split2[2] <= vals[i] <= split2[3]:
+                risk = np.append(risk, 3)
+            elif split2[3] <= vals[i] <= split2[4]:
+                risk = np.append(risk, 4)
+            elif split2[4] <= vals[i] <= split2[5]:
+                risk = np.append(risk, 5)
+        elif mapping[i] == sorted_pts[2]:
+            if split3[0] <= vals[i] <= split3[1]:
+                risk = np.append(risk, 1)
+            elif split3[1] <= vals[i] <= split3[2]:
+                risk = np.append(risk, 2)
+            elif split3[2] <= vals[i] <= split3[3]:
+                risk = np.append(risk, 3)
+            elif split3[3] <= vals[i] <= split3[4]:
+                risk = np.append(risk, 4)
+            elif split3[4] <= vals[i] <= split3[5]:
+                risk = np.append(risk, 5)
+    '''for i in vals:
         if split1[0] <= i <= split1[1] or split2[0] <= i <= split2[1] or split3[0] <= i <= split3[1]:
-            risk = np.append(risk, 1)
+            risk = np.append(risk, 5)
         elif split1[1] <= i <= split1[2] or split2[1] <= i <= split2[2] or split3[1] <= i <= split3[2]:
-            risk = np.append(risk, 2)
+            risk = np.append(risk, 4)
         elif split1[2] <= i <= split1[3] or split2[2] <= i <= split2[3] or split3[2] <= i <= split3[3]:
             risk = np.append(risk, 3)
         elif split1[3] <= i <= split1[4] or split2[3] <= i <= split2[4] or split3[3] <= i <= split3[4]:
-            risk = np.append(risk, 4)
+            risk = np.append(risk, 2)
         elif split1[4] <= i <= split1[5] or split2[4] <= i <= split2[5] or split3[4] <= i <= split3[5]:
-            risk = np.append(risk, 5)
+            risk = np.append(risk, 1)'''
     print(len(vals))
     print(len(risk))
     return risk
 
+
+def detect_duplicates(sheet_read):
+    temp_ctr = 0
+    for el in set(sheet_read):
+        if sheet_read.tolist().count(el) > 1:
+            temp_ctr += sheet_read.tolist().count(el)
+            # print el, sheet_read.count(el), len(sheet_read) - x[::-1].index(el)
+    print(temp_ctr)
+    return temp_ctr
 # END OF FUNCTIONS
 
-workbook = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/FY_Params.xlsx")
+workbook = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/VAR.xlsx")
 book = xlwt.Workbook()
 
 writesheets = ["FY-1", "FY-2", "FY-3", "FY-4", "FY-5", "FY-6"]
-# writesheets = ["VOLATILITY1", "VOLATILITY2", "VOLATILITY3", "VOLATILITY4", "VOLATILITY5", "VOLATILITY6"]
-readsheet = workbook.sheet_by_name("GEAR")
+
+writesheets_1 = ["Sheet1", "Sheet2", "Sheet3", "Sheet4", "Sheet5", "Sheet6"]
+#readsheet = workbook.sheet_by_name("sheet1")
 for lims in range(0, len(writesheets)):
     # Mention column to read from along with the sheet
-    values, used = create_data(readsheet, lims + 2)
+    readsheet = workbook.sheet_by_name(writesheets_1[lims])
+    values, used = create_data(readsheet, 2)
+    # Calculte the duplicates
+    duplicates = detect_duplicates(values)
     # setup kmeans network
     km, used = kmeans_setup(used)
     # to get the mapping, distance from centroid, sort centers
@@ -140,17 +204,20 @@ for lims in range(0, len(writesheets)):
     print(ranges)
     print("printing sorted range")
     print(sorted_centers)
+    print("mapping")
+    print(maps)
     # get the risk values
-    answers = risk_vals(ranges, values)
+    answers = risk_vals(ranges, values, sorted_centers, maps)
     sheetwrite = book.add_sheet(writesheets[lims])
     sheetwrite.write(0, 0, "COMPANY")
     sheetwrite.write(0, 1, "VALUE")
     sheetwrite.write(0, 2, "CLUSTER CENTER")
     sheetwrite.write(0, 3, "DISTANCE")
     sheetwrite.write(0, 4, "RISK RATING")
+    sheetwrite.write(0, 5, duplicates)
     for k in range(0, len(values)):
         sheetwrite.write(k + 2, 0, str(readsheet.cell_value(k + 2, 0)))
         sheetwrite.write(k + 2, 1, values[k])
         sheetwrite.write(k + 2, 3, dists[k])
         sheetwrite.write(k + 2, 4, answers[k])
-book.save("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmGEAR.xlsx")
+book.save("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmVAR.xlsx")
