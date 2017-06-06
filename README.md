@@ -1,3 +1,7 @@
+# Risk Scoring for Financial Assets
+
+The project aims to provide a risk score for companies in the CDAX. The scoring is based on the performance of the company based on several parameters.
+
 Stage 1 - Calculate Volatility
 We use the following links :- https://en.wikipedia.org/wiki/Volatility_(finance) and http://www.macroption.com/historical-volatility-calculation/ 
 Three types of volatility - Historical (Ashwath) , Annual (Saurabh) , Quarterly and Monthly (Rajat). 
