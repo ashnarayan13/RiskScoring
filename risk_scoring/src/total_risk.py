@@ -32,12 +32,19 @@ def risk_calculator(temp_ebitda, ebitda_dup, temp_volatility, volatility_dup, te
 
 
 book = xlwt.Workbook()
-ebitda = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmEBITDA.xlsx")
+'''ebitda = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmEBITDA.xlsx")
 volatility = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmVOLATILITY.xlsx")
 roce = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmROCE.xlsx")
 gear = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmGEAR.xlsx")
 beta = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmBETA.xlsx")
-var = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmVAR.xlsx")
+var = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmVAR.xlsx")'''
+ebitda = xlrd.open_workbook("/home/ashwath/FinancialModel/risk_scoring/risk_results/risk_EBITDA.xlsx")
+volatility = xlrd.open_workbook("/home/ashwath/FinancialModel/risk_scoring/risk_results/risk_VOLATILITY.xlsx")
+roce = xlrd.open_workbook("/home/ashwath/FinancialModel/risk_scoring/risk_results/risk_ROCE.xlsx")
+gear = xlrd.open_workbook("/home/ashwath/FinancialModel/risk_scoring/risk_results/risk_GEAR.xlsx")
+beta = xlrd.open_workbook("/home/ashwath/FinancialModel/risk_scoring/risk_results/risk_BETA.xlsx")
+var = xlrd.open_workbook("/home/ashwath/FinancialModel/risk_scoring/risk_results/risk_VAR.xlsx")
+
 writesheets = ["FY-1", "FY-2", "FY-3", "FY-4", "FY-5", "FY-6"]
 tags = ["EBITDA", "ROCE", "VOLATILITY", "GEAR"]
 final_ebitda = np.zeros(425)
@@ -73,4 +80,4 @@ results = ebitda.sheet_by_name(writesheets[i])
 for vals in range(0, len(final_IDP)):
     sheet.write(vals + 2, 0, str(results.cell_value(vals + 2, 0)))
     sheet.write(vals + 2, 1, final_IDP[vals])
-book.save("/home/ashwath/PycharmProjects/risk_scoring/risk_results/RESULTS.xlsx")
+book.save("/home/ashwath/FinancialModel/risk_scoring/risk_results/risk_RESULTS.xlsx")

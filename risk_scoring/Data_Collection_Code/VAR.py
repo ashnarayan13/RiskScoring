@@ -5,8 +5,10 @@ import xlrd
 import csv
 import math
 import xlsxwriter
-book=xlsxwriter.Workbook("VARyrssswise.xlsx")
-wsheet=book.add_worksheet("sheet1")
+
+book=xlsxwriter.Workbook("VAR.xlsx")
+wsheet=book.add_worksheet("VAR")
+
 yr=2006
 for i in range(0,11):
     wsheet.write(i,0,yr)
@@ -47,6 +49,7 @@ def calcVar(ColIndex):
         print var
         wsheet.write(i,col,var)
         #pl.show()
+
 workbook = xlrd.open_workbook("DataSet_Final.xlsx")
 sheet = workbook.sheet_by_name("TS")
 for i in range(3,sheet.ncols,2):

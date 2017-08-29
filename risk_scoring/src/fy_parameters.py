@@ -5,7 +5,7 @@ import xlwt
 ##############################################################
 # EBITDA CALC
 # EBIT Calculation is correct! Compares the EBITDA values of the years
-def ebit(choice, sheet):
+def ebit(choice, sheet, wb_EBITDA):
     info = []
     # print(sheet.ncols)
     for cols in range(2, 8):
@@ -18,7 +18,7 @@ def ebit(choice, sheet):
 
 
 # ROE works! Follows the equation taken from the lecture (Total_Revenue - Cost_Of_Goods_Sold)/EQUITY
-def roe(choice, sheet21_roe, sheet22_roe, sheet23_roe):
+def roe(choice, sheet21_roe, sheet22_roe, sheet23_roe, wb_ROE):
     roe_cal = []
     for i in range(2, sheet21_roe.ncols):
         if sheet21_roe.cell_value(choice, i) != "NULL" and sheet22_roe.cell_value(choice, i) != "NULL" and sheet23_roe.cell_value(choice, i) != "NULL" and sheet22_roe.cell_value(choice, i) != 0:
@@ -31,7 +31,7 @@ def roe(choice, sheet21_roe, sheet22_roe, sheet23_roe):
 
 
 # GEAR works! will output 0 if the debt is 0 as it can't be used otherwise using the equation debt/equity
-def gear(choice, sheet31_gear, sheet32_gear):
+def gear(choice, sheet31_gear, sheet32_gear, wb_GEAR):
     gear_cal = []
     for i in range(2, sheet31_gear.ncols):
         if sheet31_gear.cell_value(choice, i) != "NULL" and sheet32_gear.cell_value(choice, i) != "NULL":
@@ -48,7 +48,7 @@ def gear(choice, sheet31_gear, sheet32_gear):
 
 
 # Profitability works! Using the equation EBITDA/Net_sale
-def profitability(choice, sheet11_prof, sheet12_prof):
+def profitability(choice, sheet11_prof, sheet12_prof, wb_PROF):
     prof = []
     for i in range(2, sheet11_prof.ncols):
         if sheet11_prof.cell_value(choice, i) != "NULL" and sheet12_prof.cell_value(choice, i) != "NULL" and sheet12_prof.cell_value(choice, i) != 0:
@@ -62,7 +62,7 @@ def profitability(choice, sheet11_prof, sheet12_prof):
 
 
 # ROCE works! Using the equation EBIT/(ASSETS-LIABILITY)
-def roce(choice, sheet41_roce, sheet42_roce, sheet43_roce):
+def roce(choice, sheet41_roce, sheet42_roce, sheet43_roce, wb_ROCE):
     roce_calc = []
     for i in range(2, sheet41_roce.ncols):
         if sheet41_roce.cell_value(choice, i) != "NULL" and sheet42_roce.cell_value(choice, i) != "NULL" and sheet43_roce.cell_value(choice, i) != "NULL":
@@ -79,7 +79,7 @@ def roce(choice, sheet41_roce, sheet42_roce, sheet43_roce):
 
 
 #############################################
-wb_sam = xlwt.Workbook()
+'''wb_sam = xlwt.Workbook()
 workbook1 = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/EBITDA.xlsx")
 sheet11 = workbook1.sheet_by_name("EBITDA")
 sheet12 = workbook1.sheet_by_name("SALES")
@@ -116,4 +116,4 @@ for rows in range(2, sheet11.nrows):
     roce(rows, sheet41, sheet42, sheet43)
     wb_ROCE.write(rows, 0, str(sheet11.cell_value(rows, 1)))
 
-wb_sam.save("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/FY_Params.xlsx")
+wb_sam.save("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/FY_Params.xlsx")'''

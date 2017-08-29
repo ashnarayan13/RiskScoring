@@ -183,6 +183,7 @@ def detect_duplicates(sheet_read):
     return temp_ctr
 # END OF FUNCTIONS
 
+'''
 workbook = xlrd.open_workbook("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/FY_Params.xlsx")
 book = xlwt.Workbook()
 
@@ -220,4 +221,4 @@ for lims in range(0, len(writesheets)):
         sheetwrite.write(k + 2, 1, values[k])
         sheetwrite.write(k + 2, 3, dists[k])
         sheetwrite.write(k + 2, 4, answers[k])
-book.save("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmGEAR.xlsx")
+book.save("/home/ashwath/PycharmProjects/risk_scoring/risk_results/PyCharmGEAR.xlsx")'''

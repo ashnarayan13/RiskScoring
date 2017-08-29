@@ -35,7 +35,7 @@ def getIndexClosingValue(rowNumber,sheet):
         
 
 def calcBeta():
-    book=xlsxwriter.Workbook("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/BetaYearWise.xlsx")
+    book=xlsxwriter.Workbook("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/BETA.xlsx")
     wsheet=book.add_worksheet("sheet1")    
 #initialize equity and index daily return 
     equityDailyReturn = []

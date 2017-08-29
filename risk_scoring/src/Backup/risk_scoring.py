@@ -8,6 +8,8 @@ import scipy
 
 
 def create_data(sheet, col):
+    '''Pass data sheet and column where data is available
+    appends data to np array'''
     values_cr_data = np.array([])
     used_cr_data = np.array([])
     for i in range(2, sheet.nrows):
@@ -18,6 +20,7 @@ def create_data(sheet, col):
 
 
 def kmeans_setup(data):
+    '''Create monte carlo dataset for unsupervised learning'''
     avg = (max(data) - min(data)) / 16
     print(min(data), max(data))
     mins = min(data) - avg
@@ -157,23 +160,13 @@ def risk_vals(ranges_final, vals, sorted_pts, mapping):
                 risk = np.append(risk, 4)
             elif split3[4] <= vals[i] <= split3[5]:
                 risk = np.append(risk, 5)
-    '''for i in vals:
-        if split1[0] <= i <= split1[1] or split2[0] <= i <= split2[1] or split3[0] <= i <= split3[1]:
-            risk = np.append(risk, 5)
-        elif split1[1] <= i <= split1[2] or split2[1] <= i <= split2[2] or split3[1] <= i <= split3[2]:
-            risk = np.append(risk, 4)
-        elif split1[2] <= i <= split1[3] or split2[2] <= i <= split2[3] or split3[2] <= i <= split3[3]:
-            risk = np.append(risk, 3)
-        elif split1[3] <= i <= split1[4] or split2[3] <= i <= split2[4] or split3[3] <= i <= split3[4]:
-            risk = np.append(risk, 2)
-        elif split1[4] <= i <= split1[5] or split2[4] <= i <= split2[5] or split3[4] <= i <= split3[5]:
-            risk = np.append(risk, 1)'''
     print(len(vals))
     print(len(risk))
     return risk
 
 
 def detect_duplicates(sheet_read):
+    '''Detects duplicate values to reduce weight based on duplicates'''
     temp_ctr = 0
     for el in set(sheet_read):
         if sheet_read.tolist().count(el) > 1:

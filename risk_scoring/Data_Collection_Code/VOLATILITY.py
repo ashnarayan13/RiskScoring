@@ -145,5 +145,5 @@ for lim in range(2, comp_sheet.nrows):
     wb_sam_sheet10.write(lim, 0, str(comp_sheet.cell_value(lim, 3)))
     wb_sam_sheet11.write(lim, 0, str(comp_sheet.cell_value(lim, 3)))
     volatility(lim)
-wb_sam.save("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/Yearly_Volatility.xlsx")
+wb_sam.save("/home/ashwath/PycharmProjects/risk_scoring/Data_Collection_Code/VOLATILITY.xlsx")
 # volatility(worksheet)
