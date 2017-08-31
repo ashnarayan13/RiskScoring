@@ -32,11 +32,10 @@ The project risk_scoring contains the project.
 
 2. Run the corresponding Python file to store the yearly data for the parameter. Edit the column numbers to match the parameter required. 
 3. Once the parameters are calculated. Use the src folder in risk_scoring for performing risk_scoring.
-    - Run the fy_parameters.py
-    - Next, run the risk_scoring_fy_params.py be mentioning the FY params. 
-    - Run the risk_scoring_others.py for the Volatility and VAR. 
-    - Run the risk_scoring_beta.py to calculate risk for BETA. 
-    - Finally, run total_risk.py to get the risk results. 
+    - Run the data_collection.py
+    - Next, run the risk_main.py be mentioning the FY params.  
+    - Finally, run total_risk.py to get the risk results.
+    - *You may have to change the path in the code to match where the files are
 
 
 ## Results
